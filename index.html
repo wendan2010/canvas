@@ -6,59 +6,12 @@
     <style>
       canvas{
         border: 1px solid red;
-
       }
     </style>
   </head>
   <body>
-    <canvas id='drawing' height='300' width='400' >canvas</canvas>
-    <button id='btn'>yyyyyyy</button>
+    <canvas id='drawing' height='500' width='500' >canvas</canvas>
   </body>
-  <script>
-    function getXY(canvas,x,y){
-      let rect=canvas.getBoundingClientRect();
-      return {
-            x: x - rect.left * (canvas.width/rect.width),
-            y: y - rect.top * (canvas.height/rect.height)
-        }
-    }
+  <script src='./index.js'></script>
 
-    (function(){
-      let drawing=document.getElementById('drawing');
-      var context=drawing.getContext('2d')
-      var allowLine=false
-      drawing.onmousedown =(e)=>{
-        allowLine=true;
-        let {x,y}=getXY(drawing,e.x,e.y);
-        context.moveTo(x,y);
-
-        drawing.onmousemove=(event)=>{
-            if(allowLine){
-              let {x,y}=getXY(drawing,event.x,event.y);
-              context.lineTo(x,y);
-              context.stroke()
-            }
-        }
-        
-      }
-
-      drawing.onmouseup=()=>{
-        allowLine=false
-      }
-
-      
-
-
-    })()
-    
-    var btn=document.getElementById('btn')
-    btn.onclick=()=>{
-      let drawing=document.getElementById('drawing');
-      let url=drawing.toDataURL('image/png');
-      let img=document.createElement('img');
-      img.src=url;
-      document.body.appendChild(img)
-    }
-
-  </script>
 </html>
